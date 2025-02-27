@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+public class Solution {
+    public static int search(ArrayList<Integer> arr, int n, int k) {
+
+        int low = 0,high = n-1;
+        while(low <= high){
+            int mid = low +(high - low)/2;
+
+            if(arr.get(mid) == k){
+                return mid;
+            }
+
+            if(arr.get(low) <= arr.get(mid)){
+                if(arr.get(low) <= k && k <= arr.get(mid)){
+                    high = mid - 1;
+                }else{
+                    low = mid + 1;
+                }
+            }else{
+                if(arr.get(mid) <= k && k <= arr.get(high)){
+                    low = mid + 1;
+                }else{
+                    high = mid - 1;
+                }
+            }
+        }
+        return -1;
+    }
+}
+
+Example 1:
+Input Format: arr = [4,5,6,7,0,1,2,3], k = 0
+Result: 4
+Explanation: Here, the target is 0. We can see that 0 is present in the given rotated sorted array, nums. Thus, we get output as 4,
+which is the index at which 0 is present in the array.
