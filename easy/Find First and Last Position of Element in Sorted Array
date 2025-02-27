@@ -1,0 +1,47 @@
+public class Solution {
+    public static int[] searchRange(int []arr, int x) {
+
+        int first = getFirstOccurenec(arr,x);
+        int last = getLastOccurenec(arr,x);
+        return new int[]{first,last};
+
+    }
+    public static int getFirstOccurenec(int arr[],int x){
+        int n = arr.length;
+        int low = 0,high = n-1,ans = -1;
+        while(low <= high){
+            int mid = low+(high-low)/2;
+            if(arr[mid] >= x){
+                if(arr[mid] == x)
+                    ans = mid;
+                    high = mid-1;
+                
+            }else{
+                low = mid+1;
+            }
+        }
+        return ans;
+    }
+
+        public static int getLastOccurenec(int arr[],int x){
+        int n = arr.length;
+        int low = 0,high = n-1,ans = -1;
+        while(low <= high){
+            int mid = low+(high-low)/2;
+            if(arr[mid] <= x){
+                if(arr[mid] == x)
+                    ans = mid;
+                    low = mid+1;
+                
+            }else{
+                high = mid-1;
+            }
+        }
+        return ans;
+    }
+}
+
+
+Input: N = 7, target=13, array[] = {3,4,13,13,13,20,40}
+Output: 4
+Explanation: As the target value is 13 , it appears for the first time at index number 2
