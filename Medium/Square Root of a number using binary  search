@@ -1,0 +1,26 @@
+import java.util.* ;
+import java.io.*; 
+
+public class Solution {
+
+	public static int sqrtN(long N) {
+	   long  low = 1,high = N,ans = -1;
+	   while(low <= high){
+		   long mid = low + (high - low)/2;
+
+		   long val = mid * mid;
+		   if(val <= N){
+			   ans = mid;
+			   low = mid +1;
+		   }else{
+			   high = mid -1 ;
+		   }
+	   }
+	   return (int)high;
+	}
+}
+
+Input Format:
+ n = 36
+Result:
+ 6
