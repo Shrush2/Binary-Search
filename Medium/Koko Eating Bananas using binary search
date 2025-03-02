@@ -1,0 +1,47 @@
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
+        int low = 1,high = findMax(piles);
+        while(low <= high){
+            int mid = low + (high - low)/2;
+            int tothrs = calcHours(piles,mid);
+            if(tothrs <= h){
+                high = mid - 1 ;
+            }else{
+                low = mid + 1 ;
+            }
+        }
+        return low;
+    }
+    public static int findMax(int[] piles){
+        int n = piles.length;
+        int max = Integer.MIN_VALUE;
+        for(int i = 0;i < n;i++){
+            max = Math.max(max,piles[i]);
+        }
+        return max;
+    }
+
+    public static int calcHours(int[] piles,int h){
+        int totalhrs = 0;
+        int n = piles.length;
+        for(int i = 0; i < n;i++){
+         totalhrs += Math.ceil((double)piles[i]/(double)h);
+        }
+        return totalhrs;
+    }
+
+}
+
+
+*** Find Maximum Bananas in a Pile:
+
+1.findMax(v): Returns the largest pile (upper bound for binary search).
+Calculate Total Hours Needed:
+
+2.calculateTotalHours(v, hourly): Computes time needed if Koko eats at hourly rate.
+Binary Search for Minimum Rate:
+
+3.minimumRateToEatBananas(v, h): Finds the smallest k such that calculateTotalHours(v, k) ≤ h.
+
+Input: piles = [3,6,7,11], h = 8
+Output: 4
