@@ -27,10 +27,10 @@ class Solution {
 
         for(int i = 0; i < n; i++){
             if(load + weights[i] > cap){
-              days += 1;
-              load = weights[i];
+              days += 1;   // Move to next day
+              load = weights[i]; // Load the current weight on the new day.
             }else{
-                load += weights[i];
+                load += weights[i];  // Load the weight on the same day.
             }
         }
 
