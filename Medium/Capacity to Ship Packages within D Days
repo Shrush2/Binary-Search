@@ -1,21 +1,25 @@
-class Solution {
+
+  class Solution {
     public int shipWithinDays(int[] weights, int days) {
         int low = Integer.MIN_VALUE , high = 0;
         int n = weights.length;
 
         for(int i = 0;i < n; i++){
             high += weights[i];
-            low = Math.max(low,weights[i]);
+            low = Math.max(low,weights[i]); //choose the ranges from low to mid
         }
 
         while(low <= high){
-            int mid = low + (high - low)/2;
+            int mid = low + (high - low)/2;//guess capacity 
                 int no_ofDa = findDays(weights,mid);
-                if(no_ofDa <= days){
+                if(no_ofDa <= days){ //if days are less than d then find least eliminate right half
                     high = mid -1;
                 }else{
-                    low = mid + 1;
-                } 
+                    low = mid + 1; //if no of days are greater than d then eliminate left half 
+                }
+
+
+      
         }
         return low;
     }
@@ -26,11 +30,11 @@ class Solution {
         int n = weights.length;
 
         for(int i = 0; i < n; i++){
-            if(load + weights[i] > cap){
-              days += 1;   // Move to next day
-              load = weights[i]; // Load the current weight on the new day.
+            if(load + weights[i] > cap){ //if capacity increase thand cap
+              days += 1; //move to next day 
+              load = weights[i]; //load curr weight on new day 
             }else{
-                load += weights[i];  // Load the weight on the same day.
+                load += weights[i]; //load weight  on same day 
             }
         }
 
