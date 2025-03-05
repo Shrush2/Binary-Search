@@ -1,0 +1,42 @@
+import java.util.*;
+public class Solution {
+    public static int aggressiveCows(int []stalls, int k) {
+        int n = stalls.length;
+        Arrays.sort(stalls);
+        int low = 1,high = stalls[n-1] - stalls[0];
+        while(low <= high){
+            int mid = low +(high - low)/2;
+
+           if(canWePlace(stalls,mid,k) == true){
+               low = mid + 1;
+           }else{
+               high = mid - 1;
+           }
+        }
+        return high;
+
+    }
+
+    public static boolean canWePlace(int []stalls,int dist,int k){
+           
+           int last = stalls[0];
+           int cntCows = 1;
+           int n = stalls.length;
+
+            for(int i = 0;i<n;i++){
+            if((stalls[i] - last) >= dist){
+                cntCows++;
+                last = stalls[i];
+            }
+
+            
+            if(cntCows >= k) return true;
+            }
+            return false;
+    }
+}
+
+We are given an array stalls[] representing the positions of stalls in a straight line and an integer k representing the number of cows.
+Our goal is to place the cows in the stalls such that the minimum distance between any two cows is maximized.
+
+Input: 'n' = 3, 'k' = 2 and 'arr' = {1, 2, 3}
