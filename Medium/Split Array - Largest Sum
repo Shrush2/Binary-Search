@@ -1,0 +1,55 @@
+class Solution {
+    public int splitArray(int[] nums, int k) {
+        int low = Integer.MIN_VALUE , high = 0;
+        int n = nums.length;
+
+        for(int i = 0;i < n;i++){
+            low = Math.max(low,nums[i]);
+            high += nums[i];
+        }
+
+        while(low <= high){
+            int mid = low +(high - low)/2;
+
+            if(countPartitions(nums,mid) > k){
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
+        }
+        return low;
+    }
+    public static int countPartitions(int nums[] ,int maxsum){
+        int n = nums.length;
+
+        int partition = 1;
+        int subArr = 0;
+
+        for(int i = 0;i < n;i++){
+            if(subArr + nums[i] <= maxsum){
+                subArr += nums[i];
+            }else{
+                partition += 1;
+                subArr = nums[i];
+
+            }
+        }
+        return partition;
+    }
+}
+
+
+We need to split an array nums into k contiguous subarrays while minimizing the maximum sum among them.
+
+Binary Search on Answer: The possible range for the largest sum is [max(nums), sum(nums)].
+Greedy Check (countPartitions): Count how many partitions we need for a given mid.
+Adjust low and high: Reduce the search space to find the minimum valid mid.
+Final Answer: The smallest mid where k partitions are possible. 
+
+Input Format:
+ N = 5, a[] = {1,2,3,4,5}, k = 3
+Result:
+ 6
+Explanation:
+ There are many ways to split the array a[] into k consecutive subarrays. The best way to do this is to split the array a[] into [1, 2, 3], [4],
+and [5], where the largest sum among the three subarrays is only 6.
