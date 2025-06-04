@@ -1,0 +1,59 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+
+    public static int chessTournament(int[] positions, int n,  int c) 
+	{
+        Arrays.sort(positions);
+   int low = 1;
+   int high = positions[n-1] - positions[0];
+   int res = 0;
+
+   while(low <= high){
+       int mid = low + (high - low)/2;
+
+       if(canPlace(positions,c,mid)){
+           res = mid;
+           low = mid + 1;
+       }else{
+           high = mid - 1;
+       }
+   }
+   return res; 
+    }
+
+    public static boolean canPlace(int positions[],int players,int mindist){
+        int cnt = 1;
+        int lastpos = positions[0];
+
+        for(int i = 1; i < positions.length;i++){
+            if(positions[i] - lastpos >= mindist){
+            cnt++;
+            lastpos = positions[i];
+
+            if(cnt >= players){
+                return true;
+            }
+        }
+        }
+        return false;
+
+    }
+
+}
+Chess tournament is going to be organized in Ninjaland. There will be C chess players going to attend the tournament. All the players will be staying in a hotel. 
+The hotel has N free rooms available for the players, where one player will choose one room to live in. The ith room is at position[i] in the hotel. 
+All rooms are in distinct positions.
+
+Focus level of a chess player is defined as the minimum distance between his room and the room of another player. The overall focus of a tournament is defined as 
+the minimum focus level among all players. You as an organizer obviously want the overall focus as high as possible so you assign the rooms to players 
+such that the overall focus is as high as possible.
+
+For example,
+let say we have 3 players and 5 rooms available and the rooms are at positions:  1 2 3 4 6
+Here the optimal allocation is in rooms 1 3 6 and the overall focus level is 2.
+
+Time C :- O(N log N + N × log(max_dist))
+
+Space C :- O(1) extra (or O(N) including input)
+
