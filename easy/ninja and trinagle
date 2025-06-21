@@ -1,0 +1,23 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static int ninjaAndTriangle(int n) {
+        int low = 1 , high = n, ans = 0;
+        while(low <= high){
+            int mid = low + (high - low) / 2;
+            long sum = (long)mid * (mid + 1)/2;
+
+            if(sum <= n){
+                ans = mid;
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
+        }
+        return ans;
+    }
+}
+Ninja has been given ‘N’ stars. Ninja has to make a triangle using these stars. The ‘i’th’ level of a triangle contains a ‘i’ number of stars.
+Can you help Ninja to make a triangle as large as possible using these stars?
+
+If the number of stars is 7 in the above example, then also the maximum height of the triangle is 3. This is because to make a triangle of heigh
